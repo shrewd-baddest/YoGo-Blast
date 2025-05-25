@@ -32,7 +32,7 @@ const url="http://localhost/npm/regist.php";
  
   axios.post(url, formData)
     .then(response =>{ 
-  navigate('/');
+  navigate('/login');
     })
     .catch(error => alert(error));
   }

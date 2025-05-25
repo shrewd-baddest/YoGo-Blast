@@ -11,8 +11,11 @@ const Home = () => {
  const  hove=useRef(null);
 const  lt=useRef(null);
 const gt=useRef(null);
-const newImages=useLoaderData();
-console.log(newImages);
+const choices=useLoaderData();
+const newImages=choices[0];
+// console.log(newImages);
+const imagesLike=choices[1];
+console.log(imagesLike);
   const images = [three, four, five]; // All slideshow images
   const [current, setCurrent] = useState(0); // Current image index
   const [autoSlide, setAutoSlide] = useState(true); // Auto play on/off
@@ -115,7 +118,7 @@ useEffect(() => {
           <li> <Link to='/home/category/BrookSide' style={{textDecoration:"none"}}>BrookSide    <span>&gt;</span></Link></li>
           <li> <Link to='/home/category/Tuzo' style={{textDecoration:"none"}}>Tuzo     <span>&gt;</span></Link></li>
           <li> <Link to='/home/category/Mala' style={{textDecoration:"none"}}>Mala     <span>&gt;</span></Link></li>
-          <li> <Link to='/home/category/Fresh' style={{textDecoration:"none"}}>Fresh     <span>&gt;</span></Link></li>
+          <li> <Link to=                    '/home/category/Fresh' style={{textDecoration:"none"}}>Fresh     <span>&gt;</span></Link></li>
           <li> <Link to='/home/category/delamere' style={{textDecoration:"none"}}>Delameare     <span>&gt;</span></Link></li>
           <li>  <Link to='/home/category/kinangop' style={{textDecoration:"none"}}>kinangop     <span>&gt;</span></Link></li>
           <li> <Link to='/home/category/gla' style={{textDecoration:"none"}}>glaceris     <span>&gt;</span></Link></li>
@@ -146,7 +149,7 @@ useEffect(() => {
           />
       ))}
 </div> */}
-  <h3 className='gsap-new' style={{opacity:'1',}} >What's New</h3>
+  <h3 className='gsap-new' style={{opacity:'1',}} >What are the New Sales</h3>
 <div className='new'>
  {newImages.map((newImage)=>(
   <div key={newImage.id} className='newImage'>
@@ -160,20 +163,22 @@ useEffect(() => {
 </div>
  ))}
 </div>
- {/*<div className="like">
-<h3>You May Also Like</h3>
+<h3>Tasty Flavours for our  Customers</h3>
+ <div className="like">
  {imagesLike.map(
-(imageLike)=>{
-  <div>
-<img src={imageLike.url}
-      key={imageLike.id}
-      />;
-<p>{imageLike.description}</p>;
-<p>{imageLike.price}</p>;
+(imagePresent)=>(
+  <div key={imagePresent.products_id} className='likedImage'>
+{   console.log()}
+<Link to= {`/home/product/${imagePresent.products_id}`} className='llinks' style={{textDecoration:"none"}} > 
+<img 
+     src={imagePresent.image_url} />
+     <p> {imagePresent.products_name} {imagePresent.weight_ml} ml</p>
+     <p className='price'>Ksh:{imagePresent.price}</p>
+     </Link>
 
 </div>
-})}
-</div> */}
+))}
+</div>
 
     </div>
   );

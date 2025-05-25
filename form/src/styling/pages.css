@@ -210,10 +210,12 @@ color: red;
   display: flex;
   flex-direction: row;
   background-color: whitesmoke;
+  margin-bottom:2%;
 }
  .nlinks>img{
-height:9rem;
- margin: 2%;
+max-height:11rem;
+min-height:7rem;
+ margin:1%;
  width: 100%;
  border-radius: 2%;
  object-fit: cover;
@@ -227,13 +229,13 @@ height:9rem;
   border-radius: 7px;
   transform:scale(1);
   transition-duration:1.5s;
-  max-width:fit-content;
+  width:20%;
 }
 .nlinks>p{
   color:black;
   margin:2px;
   font-style:italics;
-
+  align-items:center;
 }
 
 .newImage:hover{
@@ -246,6 +248,35 @@ height:9rem;
   display:flex;
   flex-direction:row;
   
+}
+.like{
+  display: flex;
+  flex-direction: row;
+  background-color: whitesmoke;
+}
+ .llinks>img{
+height:9rem;
+ margin: 2%;
+ width: 100%;
+ border-radius: 2%;
+ object-fit: cover;
+  display: block;
+  margin:auto;
+}
+.likedImage{
+  margin: 2%;
+  border: 0px black solid;
+  padding: 1%;
+  border-radius: 7px;
+  transform:scale(1);
+  transition-duration:1.5s;
+  max-width:fit-content;
+}
+.llinks>p{
+  color:black;
+  margin:2px;
+  font-style:italics;
+
 }
 /* displays */
 .display{
@@ -389,3 +420,53 @@ width: 40%;
   box-shadow: 2px  2px 4px rgb(0, 0, 0);
   border-radius:8px;
 }
+/* cart-page */
+.cart-products{
+  display:flex;
+flex-direction: row;
+flex-wrap: nowrap;
+justify-content: center;
+align-items: center;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  max-height: 4rem;
+  
+  margin: 3%;
+  margin-left: 8%;
+  margin-right: 8%;
+  background-attachment: fixed;
+}
+.cart-Image{
+  max-height:15%;
+  min-height: fit-content;
+  width: fit-content;
+  object-fit: contain;
+  border-radius: 5px;
+  box-shadow: 2px 3px 4px burlywood;
+  margin-left: 1%;
+  margin-right:20%;
+}
+.cart-weight{
+  margin-right: 15%;
+}
+.cart-quantity{
+    margin-right: 10%;
+
+}
+.cart-buttons{
+    display:grid;
+grid-template-columns: repeat(3,auto);
+gap:3%;
+}
+.cart-buttons>button{
+ font-size:1.1rem; 
+ border-radius:6px;
+ font-weight:550;
+}
+.delete{
+  background-color: red;
+  
+}
+/* cart page */
+ 

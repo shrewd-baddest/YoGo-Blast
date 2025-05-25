@@ -1,22 +1,32 @@
-import React from 'react'
-import { createContext,
-useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
-const cartContext=createContext();
+const cartContext = createContext();
 
-export const CartProvider = ({children}) => {
-    const [count,setCount]=useState(0);
-    const increamentCart=(quantity)=>{
-        setCount(prev=>prev+quantity);
-    }
+export const CartProvider = ({ children }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    axios.get('http://localhost/npm/cart.php', { withCredentials: true })
+      .then(response => {
+        const Counts = response.data.total_quantity || 0;
+        setCount(Counts);
+      })
+      .catch(error => {
+        console.error('Error fetching cart count:', error);
+      });
+  }, [count]);
+
+  const increamentCart = (quantity) => {
+    setCount(prev => Math.max(0, prev + quantity));
+  };
+
   return (
-    <div>
-      <cartContext.Provider value={{count,increamentCart}}>
-       {children}
-        </cartContext.Provider>
-    </div>
-  )
-}
+    <cartContext.Provider value={{ count, increamentCart }}>
+      {children}
+    </cartContext.Provider>
+  );
+};
 
-    
-export const useCart=()=>useContext(cartContext);
+export const useCart = () => useContext(cartContext);
+

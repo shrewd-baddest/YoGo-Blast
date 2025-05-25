@@ -36,10 +36,22 @@ input[type="password"]{
     background-color: burlywood;
 
 }
+.google{
+  margin: auto;
+     background-color: hsla(120, 10%, 67%, 0.5);
+   border-radius:10px;
+   color:blue;
+   font-weight: bold;
+   max-width: fit-content;
+}
+.google:hover{
+  background-color: hsla(120, 22%, 65% , 0.8);
+}
 .acct{
+  margin-top: 6px;
    background-color: hsl(120, 100%, 25%,0.5);
    border-radius:10px;
-
+   margin-bottom:5px;
    color: white;
  }
  .acct:hover{

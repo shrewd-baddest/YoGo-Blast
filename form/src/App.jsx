@@ -7,7 +7,7 @@ import Body from './Layout/Body';
  import Not from './pages/Not';
 import Home, { n_image } from './webpages/Home';
 import Categories, { Category } from './webpages/Categories';
-import Cart from './webpages/Cart';
+import Cart  from './webpages/Cart';
 import Acct from './webpages/Acct';
 import Contact from './webpages/contact';
  import LayOut from './Layout/LayOut';
@@ -24,7 +24,7 @@ createRoutesFromElements(
   <Route  path='/login' element={<Body />}>
   <Route index element={<Loginn/>} />
   <Route path='signup' element={<Regist/>} />
-  </Route>
+  </Route>      
 
 <Route path='/home' element={<LayOut/>}  errorElement={<Error/>}>
   <Route  index  element={<Home/>} loader={n_image}/>
@@ -38,7 +38,12 @@ createRoutesFromElements(
   </Route>
   <Route path='*' element={<Not/>}/>
   </>
-)
+),
+{
+  future: {
+    v7_relativeSplatPath: true
+  }
+}
 
   )
   return (

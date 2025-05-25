@@ -1,14 +1,37 @@
 import React, {  useRef, useState ,useEffect} from 'react';
 import axios from 'axios';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData,Link } from 'react-router-dom';
    import {useCart} from '../pages/CartContext';
    import gsap from 'gsap';
   
 const Display = () => {
-  const details=useLoaderData();
-  console.log(details);
+  const detail=useLoaderData();
+   console.log(detail);
   const [quantity,setquantity]=useState(1);
- const {increamentCart}=useCart();
+  const {increamentCart}=useCart(); 
+  const [newImages,setnewImages]=useState([])
+
+  useEffect(
+()=>{
+const n_image=async()=>{
+  try{
+
+    const newImages=await fetch('http://localhost/npm/home.php');
+  setnewImages(await newImages.json());
+  }
+  catch(error){
+    console.log(error);
+    return null;
+  }
+  finally{
+     console.log('home page');
+     
+  }
+}
+n_image();
+},
+[]
+  )
  
  useEffect(() => {
   const tl = gsap.timeline({ duration:3,ease:"power1.out", });
@@ -19,7 +42,7 @@ const Display = () => {
 
     },
   {
-    opacity:1,
+    opacity:1, 
     x:0,
   }).fromTo(gsap.utils.toArray('.detail-gsap'), {
       opacity: 0,
@@ -36,22 +59,26 @@ const subtract=()=>{
 const add=()=>{
   setquantity(prev => prev + 1);
 }
+ 
 
 
-
+ 
  const addToCart = async () => {
     const cartData = {
       Quantity: quantity,
-      productId: details.product_id,
+      productId:detail.products_id,
     };
-
+    console.log(cartData.productId);
     try {
-      const response = await axios.post('http://localhost/npm/cart.php', cartData );
-     if(response.data){
-       increamentCart(quantity);
-       console.log(response.data);
-     }
-      
+      const response = await axios.post(
+        'http://localhost/npm/cart.php',
+        cartData,
+        { withCredentials: true }   //Include credentials in the request
+      );
+      if(response.data.status=="success"){
+        increamentCart(quantity);
+        alert(response.data.message);
+      }
     } catch (error) {
       console.error('Error adding to cart:', error);
     }
@@ -61,8 +88,9 @@ const add=()=>{
   return (
     <div style={{ paddingLeft: '8%', paddingRight: '8%' }}>
 {
-  details.map((detail) => (
-    <div key={detail.product_id} className='display'      style={{
+  // details.map((detail) => (
+
+    <div key={detail.products_id} className='display'      style={{
       display: 'grid',
       gridTemplateColumns: 'auto auto',
       gap: '10%',
@@ -77,6 +105,7 @@ const add=()=>{
       <div  className="detail-gsap">
       <h2 className='des'>
         {detail.description}
+     
       </h2>
       <h3 className='price'>Price: {detail.price}</h3>
     <div className='table'>
@@ -104,10 +133,24 @@ const add=()=>{
       <button className='pay_now'>Pay Now</button></div>
       </div>
     </div>
-  ))
+    
+  // ))
 }
   
-
+<h3 className='gsap-new' style={{opacity:'1',}} >What are the New Sales</h3>
+<div className='new'>
+ {newImages.map((newImage)=>(
+  <div key={newImage.id} className='newImage'>
+<Link to= {`/home/product/${newImage.products_id}`} className='nlinks' style={{textDecoration:"none"}} > 
+<img 
+     src={newImage.image_url} />
+     <p> {newImage.products_name} {newImage.weight_ml} ml</p>
+     <p className='price'>Ksh:{newImage.price}</p>
+     </Link>
+     
+</div>
+ ))}
+</div>
   
     </div>
   )
@@ -126,7 +169,7 @@ export const productDetails=async({params}) => {
       return response.data;
     }
     else{
-      throw new Error('product not found');
+throw new Response("Not Found", { status: 404 });
     }
   
     }
@@ -134,6 +177,22 @@ export const productDetails=async({params}) => {
   catch(error){
    alert(error.message); 
    return null;
+  }
+}
+export const cart=async()=>{
+  
+  try{
+
+   const number=await fetch('http://localhost/npm/cart.php');
+  return number.json();
+  }
+  catch(error){
+    console.log(error);
+    return null; 
+  }
+  finally{
+     console.log('home page');
+     
   }
 }
 

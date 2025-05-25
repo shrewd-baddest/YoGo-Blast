@@ -29,8 +29,8 @@ const Welcome = () => {
         ease: 'back.in',
       })
       .add(() => {
-        navigate('/Home');
-      }); // Navigate after animation finishes
+        navigate('/home');
+      }); 
   };
 
   useEffect(() => {
