@@ -1,0 +1,13 @@
+import React from 'react'
+
+const Acct = () => {
+  return (
+    <div>
+      
+      <h3>My Orders</h3>
+      <p>UnPaid</p>
+    </div>
+  )
+}
+
+export default Acct
